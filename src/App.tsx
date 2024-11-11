@@ -1,10 +1,12 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import AppHeader from "./components/AppHeader";
-import InputBox from "./components/inputBox";
+import InputBox from "./components/InputBox";
 import { useState } from "react";
+import LanguageSelect from "./components/LanguageSelect";
 
 const App = () => {
-const [text , setText] = useState<string>('');
+  const [text, setText] = useState<string>("");
+  const [sourceLang, setSourceLang] = useState<string>("en");
 
   return (
     <>
@@ -16,7 +18,7 @@ const [text , setText] = useState<string>('');
         gap={4}
       >
         <GridItem area="nav">
-          <AppHeader/>
+          <AppHeader />
         </GridItem>
 
         {/* Show the 'aside' grid item only on screens larger than 'lg' */}
@@ -29,7 +31,12 @@ const [text , setText] = useState<string>('');
         </GridItem>
 
         <GridItem area="main">
-          <InputBox text={text} onTextChange={(e) => setText(e.target.value)}/>
+          <LanguageSelect
+            label="Select Language"
+            selectedLanguage={sourceLang}
+            onLanguageChange={(language: string) => setSourceLang(language)}
+          />
+          <InputBox text={text} onTextChange={(e) => setText(e.target.value)} />
         </GridItem>
       </Grid>
     </>
