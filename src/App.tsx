@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Stack } from "@chakra-ui/react";
 import AppHeader from "./components/AppHeader";
 import InputBox from "./components/InputBox";
 import { useState } from "react";
@@ -17,7 +17,7 @@ const App = () => {
         }}
         gap={4}
       >
-        <GridItem area="nav">
+        <GridItem area="nav" bg="green.100">
           <AppHeader />
         </GridItem>
 
@@ -31,12 +31,16 @@ const App = () => {
         </GridItem>
 
         <GridItem area="main">
-          <LanguageSelect
-            label="Select Language"
-            selectedLanguage={sourceLang}
-            onLanguageChange={(language: string) => setSourceLang(language)}
-          />
-          <InputBox text={text} onTextChange={(e) => setText(e.target.value)} />
+          <Stack>
+            <LanguageSelect
+              selectedLanguage={sourceLang}
+              onLanguageChange={(language: string) => setSourceLang(language)}
+            />
+            <InputBox
+              text={text}
+              onTextChange={(e) => setText(e.target.value)}
+            />
+          </Stack>
         </GridItem>
       </Grid>
     </>

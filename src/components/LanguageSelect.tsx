@@ -1,14 +1,12 @@
 import React from "react";
-import Select from "react-select";
+import { Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 
 interface LanguageSelectProps {
-  label: string;
   selectedLanguage: string;
   onLanguageChange: (language: string) => void;
 }
 
 const LanguageSelect: React.FC<LanguageSelectProps> = ({
-  label,
   selectedLanguage,
   onLanguageChange,
 }) => {
@@ -22,16 +20,23 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({
   ];
 
   return (
-    <>
-      <label>{label}</label>
+    <FormControl variant="outlined" margin="dense" style={{ width: '400px' }}>
+      <InputLabel id="language-select-label">Select Language</InputLabel>
       <Select
-        options={languages}
-        value={languages.find((lang) => lang.value === selectedLanguage)}
-        onChange={(option) => option && onLanguageChange(option.value)}
-        placeholder="Select language"
-        
-      />
-    </>
+        labelId="language-select-label"
+        value={selectedLanguage}
+        onChange={(e) => onLanguageChange(e.target.value as string)}
+        label="Select Language"
+        size="medium"
+        style={{ width: '100%' }} // Adjust the width as needed
+      >
+        {languages.map((lang) => (
+          <MenuItem key={lang.value} value={lang.value}>
+            {lang.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 
