@@ -29,7 +29,7 @@ const [text , setText] = useState<string>('');
         </GridItem>
 
         <GridItem area="main">
-          <InputBox text={text}/>
+          <InputBox text={text} onTextChange={(e) => setText(e.target.value)}/>
         </GridItem>
       </Grid>
     </>
