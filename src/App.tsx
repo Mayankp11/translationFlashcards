@@ -1,4 +1,4 @@
-import { Grid, GridItem, HStack, Stack } from "@chakra-ui/react";
+import { Button, Grid, GridItem, HStack, Stack } from "@chakra-ui/react";
 import AppHeader from "./components/AppHeader";
 import InputBox from "./components/InputBox";
 import { useState } from "react";
@@ -41,6 +41,7 @@ const App = () => {
               text={text}
               onTextChange={(e) => setText(e.target.value)}
             />
+            
             <HStack>
               <Flashcards language="English" />
               <Flashcards language="Spanish"/>
