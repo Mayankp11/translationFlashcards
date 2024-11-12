@@ -1,13 +1,30 @@
-import { Button, Grid, GridItem, HStack, Stack } from "@chakra-ui/react";
+import {
+  Button,
+  Grid,
+  GridItem,
+  HStack,
+  Stack,
+  Textarea,
+} from "@chakra-ui/react";
 import AppHeader from "./components/AppHeader";
 import InputBox from "./components/InputBox";
 import { useState } from "react";
 import LanguageSelect from "./components/LanguageSelect";
 import Flashcards from "./components/Flashcards";
+import TranslationLogic from "./components/service/TranslationService";
+import TranslatedText from "./components/TranslatedBoxTest";
 
 const App = () => {
   const [text, setText] = useState<string>("");
   const [sourceLang, setSourceLang] = useState<string>("en");
+  const [targetLang, setTargetLang] = useState<string>("fr");
+  const [translatedText, setTranslatedText] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const handleTranslationResult = (translateText: string) => {
+    setTranslatedText(translateText);
+    setError(""); // Clear any previous error if translation is successful
+  };
 
   return (
     <>
@@ -22,11 +39,10 @@ const App = () => {
           <AppHeader />
         </GridItem>
 
-        {/* Show the 'aside' grid item only on screens larger than 'lg' */}
         <GridItem
           area="aside"
           bg="blue"
-          display={{ base: "none", lg: "block" }} // Shows only on large screens and up
+          display={{ base: "none", lg: "block" }}
         >
           aside
         </GridItem>
@@ -41,13 +57,24 @@ const App = () => {
               text={text}
               onTextChange={(e) => setText(e.target.value)}
             />
-            
+
+            {/* TranslationLogic component with the button to trigger translation */}
+            <TranslationLogic
+              text={text}
+              sourceLang={sourceLang}
+              targetLang={targetLang}
+              onTranslated={handleTranslationResult}
+              onError={setError}
+            />
+
+            {/* Display the translated text */}
+            <TranslatedText translatedText={translatedText} />
+
             <HStack>
               <Flashcards language="English" />
-              <Flashcards language="Spanish"/>
-              <Flashcards language="German"/>
-              <Flashcards language="French"/>
-              
+              <Flashcards language="Spanish" />
+              <Flashcards language="German" />
+              <Flashcards language="French" />
             </HStack>
           </Stack>
         </GridItem>

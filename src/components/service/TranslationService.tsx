@@ -7,7 +7,7 @@ interface TranslationProps {
   sourceLang: string;
   targetLang: string;
   onTranslated: (translatedText: string) => void;
-  onError: (errorMsg: string) => void;  // Add the onError prop
+  onError: (errorMsg: string) => void;
 }
 
 const TranslationLogic: React.FC<TranslationProps> = ({
@@ -15,12 +15,12 @@ const TranslationLogic: React.FC<TranslationProps> = ({
   sourceLang,
   targetLang,
   onTranslated,
-  onError,  // Destructure the onError prop
+  onError,
 }) => {
   const [error, setError] = useState<string | null>(null);
 
   const handleTranslate = async () => {
-    const apiKey = import.meta.env.VITE_GOOGLE_API_KEY; // Replace with actual API key
+    const apiKey = "AIzaSyB3lzPW5nl5Q-T6IWnX5o0Ijwr6MckM06Q"; // Replace with your actual Google API key
     const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
 
     try {
@@ -43,7 +43,7 @@ const TranslationLogic: React.FC<TranslationProps> = ({
       }
     } catch (error) {
       console.error("Error translating text:", error);
-      const errorMessage = "Both languages cannot be the same";  // Customize error message
+      const errorMessage = "Error occurred while translating";  // Generic error message
       setError(errorMessage);
       onError(errorMessage);  // Pass error to parent via onError prop
       onTranslated(""); // Clear the translated text on error
