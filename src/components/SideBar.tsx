@@ -14,7 +14,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const SideBar = () => {
   return (
