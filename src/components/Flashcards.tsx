@@ -1,85 +1,65 @@
-import { Card, CardContent, Typography, Box } from "@mui/material";
-import React, { useState } from "react";
+// src/components/Flashcards.tsx
+import React from "react";
+import {  SimpleGrid, Text } from "@chakra-ui/react";
+import Grid from '@mui/material/Grid2';
+import { Card, CardContent, Typography } from "@mui/material";
 
-interface FlashcardProps {
-  language: string;
-  
+
+interface FlashcardsProps {
+  translations: { [key: string]: string };
+  languages: { code: string; name: string }[];
 }
 
-const Flashcards: React.FC<FlashcardProps> = ({ language}) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleFlip = () => {
-    setIsFlipped((prev) => !prev);
-  };
-
+const Flashcards: React.FC<FlashcardsProps> = ({ translations, languages }) => {
   return (
-    <Box
-      onClick={handleFlip}
-      sx={{
-        perspective: "1000px", // Creates a 3D effect for the flip
-        cursor: "pointer",
-        display: "inline-block",
-      }}
-    >
-      <Box
-        sx={{
-          position: "relative",
-          width: "200px",
-          height: "250px",
-          transformStyle: "preserve-3d",
-          transition: "transform 0.6s",
-          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-        }}
-      >
-        {/* Front Side */}
-        <Card
-          sx={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            backfaceVisibility: "hidden",
-            border: "2px solid #000",
-            borderRadius: "8px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CardContent>
-            <Typography variant="h6" align="center">
-              {language}
-            </Typography>
-          </CardContent>
-        </Card>
+    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap="20px"> {/* Added spacing */}
+    {languages.map((language) => (
+      <Card key={language.code} style={{ height: "150px" }}>
+        <CardContent>
+          <Text fontWeight="bold">{language.name}</Text>
+          <Text mt={4}>
+            {translations[language.code] || "?"}
+          </Text>
+        </CardContent>
+      </Card>
+    ))}
+  </SimpleGrid>
 
-        {/* Back Side */}
-        <Card
-          sx={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            backfaceVisibility: "hidden",
-            border: "2px solid #000",
-            borderRadius: "8px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transform: "rotateY(180deg)", // Rotate the back side
-            backgroundColor: "#f5f5f5",
-          }}
-        >
-          <CardContent>
-            <Typography variant="h6" align="center">
-            </Typography>
-          </CardContent>
-        </Card>
-      </Box>
-    </Box>
+// {/* <Grid container spacing={{ xs: 1, sm: 2, md: 3, lg: 3 }}>
+// {languages.map((language) => (
+//   <Grid  key={language.code}> {/* Adjust item width based on screen size */}
+//     <Card sx={{ minHeight: "300px", minWidth: "200px" }}>
+//       <CardContent>
+//         <Typography variant="h6">{language.name}</Typography>
+//         <Typography variant="body1">
+//           {translations[language.code] || "?"}
+//         </Typography>
+//       </CardContent>
+//     </Card>
+//   </Grid>
+// ))}
+// </Grid> */}
+
+    // <>
+      // <Grid2 container spacing={4}>
+      //   {languages.map((language) => (
+      //     <Grid2 item xs={12} sm={6} md={4} key={language.code}>
+      //       <Card style={{ height: "150px" }}>
+      //         <CardContent>
+      //           <Typography variant="h6" fontWeight="bold">
+      //             {language.name}
+      //           </Typography>
+      //           <Typography variant="body1" style={{ marginTop: "16px" }}>
+      //             {translations[language.code] || "?"}
+      //           </Typography>
+      //         </CardContent>
+      //       </Card>
+      //     </Grid2>
+      //   ))}
+      // </Grid2>
+    // </>
+   
+
   );
 };
 

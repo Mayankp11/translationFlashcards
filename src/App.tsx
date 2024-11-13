@@ -1,29 +1,20 @@
-import {
-  Button,
-  Grid,
-  GridItem,
-  HStack,
-  Stack,
-  Textarea,
-} from "@chakra-ui/react";
-import AppHeader from "./components/AppHeader";
+// src/App.tsx
+import React, { useState } from "react";
+import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
 import InputBox from "./components/InputBox";
-import { useState } from "react";
-import LanguageSelect from "./components/LanguageSelect";
+import TranslateButton from "./components/TranslateButton";
 import Flashcards from "./components/Flashcards";
-import TranslationLogic from "./components/service/TranslationService";
-import TranslatedText from "./components/TranslatedBoxTest";
+import { useTranslation } from "./components/hooks/useTranslation";
+import AppHeader from "./components/AppHeader";
+import LanguageSelect from "./components/LanguageSelect";
 
-const App = () => {
-  const [text, setText] = useState<string>("");
-  const [sourceLang, setSourceLang] = useState<string>("en");
-  const [targetLang, setTargetLang] = useState<string>("fr");
-  const [translatedText, setTranslatedText] = useState<string>("");
-  const [error, setError] = useState<string>("");
+const App: React.FC = () => {
+  const [inputText, setInputText] = useState("");
+  const { translations, translateText, loading, languages } = useTranslation();
+  // const [selectLang, setSelectLang] = useState<string>("en");
 
-  const handleTranslationResult = (translateText: string) => {
-    setTranslatedText(translateText);
-    setError(""); // Clear any previous error if translation is successful
+  const handleTranslate = () => {
+    translateText(inputText);
   };
 
   return (
@@ -35,48 +26,15 @@ const App = () => {
         }}
         gap={4}
       >
-        <GridItem area="nav" bg="green.100">
+        <GridItem area="nav" bg="green.200">
           <AppHeader />
         </GridItem>
-
-        <GridItem
-          area="aside"
-          bg="blue"
-          display={{ base: "none", lg: "block" }}
-        >
-          aside
-        </GridItem>
-
+        <GridItem area="aside" bg="blue.200"></GridItem>
         <GridItem area="main">
-          <Stack>
-            <LanguageSelect
-              selectedLanguage={sourceLang}
-              onLanguageChange={(language: string) => setSourceLang(language)}
-            />
-            <InputBox
-              text={text}
-              onTextChange={(e) => setText(e.target.value)}
-            />
-
-            {/* TranslationLogic component with the button to trigger translation */}
-            <TranslationLogic
-              text={text}
-              sourceLang={sourceLang}
-              targetLang={targetLang}
-              onTranslated={handleTranslationResult}
-              onError={setError}
-            />
-
-            {/* Display the translated text */}
-            <TranslatedText translatedText={translatedText} />
-
-            <HStack>
-              <Flashcards language="English" />
-              <Flashcards language="Spanish" />
-              <Flashcards language="German" />
-              <Flashcards language="French" />
-            </HStack>
-          </Stack>
+          {/* <LanguageSelect selectedLanguage={selectLang} onLanguageChange={(language) => setSelectLang(language)}/> */}
+          <InputBox inputText={inputText} setInputText={setInputText} />
+          <TranslateButton onClick={handleTranslate} isLoading={loading} />
+          <Flashcards translations={translations} languages={languages} />
         </GridItem>
       </Grid>
     </>

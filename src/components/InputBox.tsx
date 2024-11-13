@@ -1,24 +1,21 @@
-
-import { Textarea } from "@chakra-ui/react";
+// src/components/InputBox.tsx
 import React from "react";
+import { Input, Textarea } from "@chakra-ui/react";
 
-interface inputBoxProps {
-    text : string;
-    onTextChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+interface InputBoxProps {
+  inputText: string;
+  setInputText: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InputBox : React.FC<inputBoxProps> = ({text, onTextChange}) => {
+const InputBox: React.FC<InputBoxProps> = ({ inputText, setInputText }) => {
   return (
-   <Textarea
-   value={text}
-   onChange={onTextChange}
-   placeholder="Enter your text here..."
-   borderColor="black"
-   borderRadius={2}
-   width={{base:"150px", lg:"250px"}}
-   height={{base:"200px" , lg:"300px"}}
-   />
-
+    <Textarea
+      placeholder="Enter text to translate"
+      value={inputText}
+      onChange={(e) => setInputText(e.target.value)}
+      
+      mb={4}
+    />
   );
 };
 
