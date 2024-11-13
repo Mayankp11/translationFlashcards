@@ -1,6 +1,6 @@
 // src/components/InputBox.tsx
 import React from "react";
-import { Input, Textarea } from "@chakra-ui/react";
+import { Textarea } from "@chakra-ui/react";
 
 interface InputBoxProps {
   inputText: string;

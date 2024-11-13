@@ -1,7 +1,7 @@
 // src/components/Flashcards.tsx
 import React from "react";
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 
 interface FlashcardsProps {
   translations: { [key: string]: string };
