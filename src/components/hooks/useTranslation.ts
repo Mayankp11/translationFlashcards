@@ -24,10 +24,11 @@ export const useTranslation = () => {
         params: {
           q: inputText,
           target: language.code,
-          key: "AIzaSyB3lzPW5nl5Q-T6IWnX5o0Ijwr6MckM06Q",
+          key: import.meta.env.VITE_GOOGLE_API_KEY,
         },
       })
     );
+
 
     try {
       const responses = await Promise.all(requests);
@@ -43,5 +44,9 @@ export const useTranslation = () => {
     }
   };
 
-  return { translations, translateText, loading, languages };
+  const resetTranslations = () => {
+    setTranslations({}); // Reset the translations state
+  };
+
+  return { translations, translateText, loading, languages , resetTranslations};
 };

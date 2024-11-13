@@ -5,13 +5,25 @@ import TranslateButton from "./components/TranslateButton";
 import Flashcards from "./components/Flashcards";
 import { useTranslation } from "./components/hooks/useTranslation";
 import AppHeader from "./components/AppHeader";
+import RefreshButton from "./components/RefreshButton";
 
 const App: React.FC = () => {
   const [inputText, setInputText] = useState("");
-  const { translations, translateText, loading, languages } = useTranslation();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { translations, translateText, loading, languages, resetTranslations } = useTranslation();
+
 
   const handleTranslate = () => {
     translateText(inputText);
+  };
+  const handleRefresh = () => {
+    setIsLoading(true);
+    setInputText("");
+    resetTranslations();
+    // Simulate a refresh action (e.g., resetting a form, reloading data, etc.)
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // Simulate a 1-second delay for the refresh action
   };
 
   return (
@@ -35,6 +47,7 @@ const App: React.FC = () => {
         <GridItem area="main1" p={4} bg="pink.50" display="flex" justifyContent="center" alignItems="center">
           <Stack align="center">
             <InputBox inputText={inputText} setInputText={setInputText} />
+            <RefreshButton onRefresh={handleRefresh} isLoading={isLoading}/>
             <TranslateButton onClick={handleTranslate} isLoading={loading} />
           </Stack>
         </GridItem>
