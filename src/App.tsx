@@ -7,6 +7,7 @@ import Flashcards from "./components/Flashcards";
 import { useTranslation } from "./components/hooks/useTranslation";
 import AppHeader from "./components/AppHeader";
 import LanguageSelect from "./components/LanguageSelect";
+import SideBar from "./components/SideBar";
 
 const App: React.FC = () => {
   const [inputText, setInputText] = useState("");
@@ -29,7 +30,9 @@ const App: React.FC = () => {
         <GridItem area="nav" bg="green.200">
           <AppHeader />
         </GridItem>
-        <GridItem area="aside" bg="blue.200"></GridItem>
+        <GridItem area="aside" bg="blue.300">
+          <SideBar />
+        </GridItem>
         <GridItem area="main">
           {/* <LanguageSelect selectedLanguage={selectLang} onLanguageChange={(language) => setSelectLang(language)}/> */}
           <InputBox inputText={inputText} setInputText={setInputText} />
