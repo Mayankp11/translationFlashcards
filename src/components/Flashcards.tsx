@@ -16,8 +16,8 @@ const Flashcards: React.FC<FlashcardsProps> = ({ translations, languages }) => {
       {languages.map((language) => (
         <Card key={language.code} style={{ height: "150px" }}>
           <CardContent>
-            <Text fontWeight="bold">{language.name}</Text>
-            <Text mt={4}>{translations[language.code] || "?"}</Text>
+            <Text textAlign="center" fontWeight="bold">{language.name}</Text>
+            <Text textAlign="center" mt={4}>{translations[language.code] || "?"}</Text>
           </CardContent>
         </Card>
       ))}

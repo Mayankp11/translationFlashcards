@@ -10,7 +10,6 @@ interface InputBoxProps {
 const InputBox: React.FC<InputBoxProps> = ({ inputText, setInputText }) => {
   return (
     <Textarea
-     
       placeholder="Enter text to translate"
       value={inputText}
       onChange={(e) => setInputText(e.target.value)}
