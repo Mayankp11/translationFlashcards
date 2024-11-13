@@ -39,7 +39,7 @@ const SideBar = () => {
       <Toolbar />
       <Divider />
       <List>
-        {['About', 'Starred', 'Send email'].map((text, index) => (
+        {['About', 'Starred', 'Send email'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>

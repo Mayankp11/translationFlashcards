@@ -30,13 +30,16 @@ const App: React.FC = () => {
         <GridItem area="nav" bg="green.200">
           <AppHeader />
         </GridItem>
-        <GridItem area="aside" bg="blue.300">
+        <GridItem >
           <SideBar />
+        </GridItem>
+        <GridItem area="aside">
+          <InputBox inputText={inputText} setInputText={setInputText} />
+          <TranslateButton onClick={handleTranslate} isLoading={loading} />
         </GridItem>
         <GridItem area="main">
           {/* <LanguageSelect selectedLanguage={selectLang} onLanguageChange={(language) => setSelectLang(language)}/> */}
-          <InputBox inputText={inputText} setInputText={setInputText} />
-          <TranslateButton onClick={handleTranslate} isLoading={loading} />
+
           <Flashcards translations={translations} languages={languages} />
         </GridItem>
       </Grid>
